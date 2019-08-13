@@ -13,7 +13,9 @@ Initial implementation  of an efficient Plane sweep Line Segment Intersection. T
 
 (The x0, y0, x1, y1 line doesn't exist in the file, just the numbers). 
 
-If you run the program the user can either choose the txt file contenting the points or just cancel the file choosing to automatically generate a random number of points (2~25). By running the visualization it will produce a file "output.txt" with the number of points, intersections, processing time and other relevant data. The algorithm itself is found on processing setup() function and it is general enough to be use in any Java aplication (although very inefficient). The visualization just shows how the algorithm works in a slow, comprehensible manner.
+If you run the program the user can either choose the txt file contenting the points or just cancel the file choosing to automatically generate a random number of points (2~25). By running the visualization it will produce a file "output.txt" with the number of points, intersections, processing time and other relevant data. The algorithm itself is found on processing setup() function and it is general enough to be use in any Java aplication (although very inefficient). The visualization just shows how the algorithm works in a slow, comprehensible manner. See below the visualization:
+
+[![Visualization of Line Intersections brute force search algorithm](https://i.ytimg.com/vi/pyxHgQsKN2g/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAr2lVJdZ0f4sjrXPPIDrYiJos_Hg)](https://www.youtube.com/watch?v=pyxHgQsKN2g&t=110s)
 
 \- \- \-
 
