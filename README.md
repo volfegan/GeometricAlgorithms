@@ -3,7 +3,7 @@ Geometric Algorithms implemented in Java and Processing v3. Algorithms details c
 
 
 #### Brute Force Plane sweep
-Initial implemetation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
+Initial implementation  of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
 
 | *x0*  |  *y0* |  *x1* |  *y1* |
 | ------|------ | ------|------ |
