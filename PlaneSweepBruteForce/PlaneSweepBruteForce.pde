@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.HashSet;
 
 
+int speedReduction = 10; //1 fastest, any other bigger number slower
+  
+  
 String[] filetxt;
 String filename;
 ArrayList<Line> lines = new ArrayList<Line>();
@@ -52,15 +55,14 @@ void interrupt() {
 }
 
 void settings() {
-  //selectInput("Select a txt file to process:", "fileSelected");
-  //interrupt(); //interrupt process until txt file is selected
+  selectInput("Select a txt file to process:", "fileSelected");
+  interrupt(); //interrupt process until txt file is selected
 
   //biggest_ used to get the correct screen size
   int biggest_x = 0;
   int biggest_y = 0;
 
   //for testing
-  filetxt = loadStrings("LineSegments.txt");
   //filetxt = loadStrings("LineSegmentsTEST.txt");
 
   println("Loading points...");
@@ -89,6 +91,7 @@ void settings() {
   if (height < 800) height = 800;
 
   size(width, height);
+  println("width="+width +", height="+height);
 }
 
 void setup() {
@@ -98,8 +101,9 @@ void setup() {
     line.display();
   }
 
-
+  /*
   //Brute force method for calculating intersection points
+   */
 
 
   startTime = System.nanoTime();
@@ -215,8 +219,9 @@ void draw() {
     showPoints.add(p_intersection);
   }
   //Control line intersection search on brute force
-  //frameCount % Number to reduce the speed of animation
-  if (frameCount % 12 == 0) {
+  //
+  //frameCount % speedReduction to reduce the speed of animation
+  if (frameCount % speedReduction == 0) {
     if (continueSelection && index < lineSegment.length-1) {
       index++;
     } else {
