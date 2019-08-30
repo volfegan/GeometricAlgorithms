@@ -28,27 +28,27 @@ public class Segment {
   /*
    * calculates the intersection point
    * 
-   * @param Segment s1
+   * @param Segment s
    * @return Point intersect
    */
-  public Point intersect(Segment s1) {
+  public Point intersect(Segment s) {
     Point intersect = new Point();
-    if (this == null || s1 == null) {
+    if (this == null || s == null) {
       return null;
     }
     //calculate the intersection point (x, y)
-    intersect.x = ((s1.a.x * s1.b.y - s1.a.y * s1.b.x)
-      * (this.a.x - this.b.x) - (s1.a.x - s1.b.x)
+    intersect.x = ((s.a.x * s.b.y - s.a.y * s.b.x)
+      * (this.a.x - this.b.x) - (s.a.x - s.b.x)
       * (this.a.x * this.b.y - this.a.y * this.b.x))
-      / ((s1.a.x - s1.b.x) * (this.a.y - this.b.y) - (s1.a.y - s1.b.y)
+      / ((s.a.x - s.b.x) * (this.a.y - this.b.y) - (s.a.y - s.b.y)
       * (this.a.x - this.b.x));
-    intersect.y = ((s1.a.x * s1.b.y - s1.a.y * s1.b.x)
-      * (this.a.y - this.b.y) - (s1.a.y - s1.b.y)
+    intersect.y = ((s.a.x * s.b.y - s.a.y * s.b.x)
+      * (this.a.y - this.b.y) - (s.a.y - s.b.y)
       * (this.a.x * this.b.y - this.a.y * this.b.x))
-      / ((s1.a.x - s1.b.x) * (this.a.y - this.b.y) - (s1.a.y - s1.b.y)
+      / ((s.a.x - s.b.x) * (this.a.y - this.b.y) - (s.a.y - s.b.y)
       * (this.a.x - this.b.x));
 
-    if (outOfRange(intersect, s1) || outOfRange(intersect, this)
+    if (outOfRange(intersect, s) || outOfRange(intersect, this)
       || Double.isNaN(intersect.x) || Double.isNaN(intersect.x)) {
       intersect = null;
     }
@@ -60,25 +60,18 @@ public class Segment {
     }
     return intersect;
   }
-  /**
+
+  /*
    * checks if intersection point is within segment range.
-   * @param Point i
+   * @param Point p
    * @param Segment s
    * @return boolean
    */
-  boolean outOfRange(Point i, Segment s) {
-    if ((i.x < s.a.x && i.x < s.b.x) || (i.x > s.a.x && i.x > s.b.x)
-      || (i.y < s.a.y && i.y < s.b.y) || (i.y > s.a.y && i.y > s.b.y)) {
+  boolean outOfRange(Point p, Segment s) {
+    if ((p.x < s.a.x && p.x < s.b.x) || (p.x > s.a.x && p.x > s.b.x)
+      || (p.y < s.a.y && p.y < s.b.y) || (p.y > s.a.y && p.y > s.b.y)) {
       return true;
     } else
-      return false;
-  }
-  
-  public boolean equals(Object segment) {
-    Segment s = (Segment) segment;
-    if (this.a.equals(s.a) && this.b.equals(s.b))
-      return true;
-    else
       return false;
   }
 }
