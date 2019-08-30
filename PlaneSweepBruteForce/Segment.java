@@ -74,9 +74,9 @@ public class Segment {
       return false;
   }
   
-  public boolean equals(Object s) {
-    Segment x = (Segment) s;
-    if (this.a.equals(x.a) && this.b.equals(x.b))
+  public boolean equals(Object segment) {
+    Segment s = (Segment) segment;
+    if (this.a.equals(s.a) && this.b.equals(s.b))
       return true;
     else
       return false;
