@@ -127,8 +127,8 @@ void setup() {
   }
   HashSet<Point> intersectionPoints = new HashSet<Point>(); //so that duplicates don't get added.
   int number_of_checks = 0;
-  //To better measure the processing time it is better to repeat the process at least 100000 time 
-  int repeatProcess = 100000;
+  //To better measure the processing time it is better to repeat the process at least 1000 time 
+  int repeatProcess = 1000;
   for (int a = 0; a < repeatProcess; a++) {
 
     intersectionPoints = new HashSet<Point>(); //so that duplicates don't get added.
