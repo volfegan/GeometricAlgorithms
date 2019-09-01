@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.HashSet;
 
 
-int speedReduction = 10; //1 fastest, any other bigger number slower
+int speedReduction = 1; //1 fastest, any other bigger number slower
   
   
 String[] filetxt;
@@ -293,18 +293,18 @@ void selectLine(int x0_, int y0_, int x1_, int y1_, color color_, int box_size) 
  */
 class Line {
 
-  PVector p1, p2;
+  PVector a, b;
 
-  Line(PVector p1, PVector p2) {
+  Line(PVector a, PVector b) {
 
-    this.p1 = p1;
-    this.p2 = p2;
+    this.a = a;
+    this.b = b;
   }  
 
   void display() {
-    color c = color(p1.x % 255, 255-p1.y % 255, p2.y % 255);
+    color c = color(a.x % 255, 255-a.y % 255, b.y % 255);
     strokeWeight(1);
     stroke(c);
-    line(p1.x, p1.y, p2.x, p2.y);
+    line(this.a.x, this.a.y, this.b.x, this.b.y);
   }
 }
