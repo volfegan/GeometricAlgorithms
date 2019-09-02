@@ -10,8 +10,8 @@ import java.util.HashSet;
 
 
 int speedReduction = 1; //1 fastest, any other bigger number slower
-  
-  
+
+
 String[] filetxt;
 String filename;
 ArrayList<Line> lines = new ArrayList<Line>();
@@ -29,16 +29,40 @@ int currentLine = 0;
 void fileSelected(File selection) {
   if (selection == null) {
     print("No file selected. ");
-    int pointz = int(random(2, 25));
-    println(pointz + " random points created:");
-    filetxt = new String[25];
-    for (int i = 0; i < pointz; i++) {
+    int linesQty = 100;
+    //when cancel file selection we create some random lines
+    //int linesQty = int(random(2, 50));
+    println(linesQty + " random segments lines created:");
+    filetxt = new String[linesQty];
+    //generate points method 01 (eval efficiency random segments)
+    for (int i = 0; i < linesQty; i++) {
       int x0 = int(random(0, 700));
       int y0 = int(random(0, 700));
       int x1 = int(random(0, 700));
       int y1 = int(random(0, 700));
       filetxt[i] = x0+" "+y0+" "+x1+" "+y1;
     }
+    /*
+    //generate points method 02 (eval efficiency for any length r size segment)
+    for (int i = 0; i < linesQty; i++) {
+      //int r = int(random(0, 699)); //r ~ 1 to canvas size
+      int r = int(random(0, 699/sqrt(sqrt(linesQty)) )); //r ~ n^(−1/4) to canvas size (sparce lines)
+      //int r = int(random(0, 699/sqrt(linesQty) )); //r ~ n^(−1/2) to canvas size (very sparce lines)
+      //int r = int(random(0, 699/linesQty )); //r ~ n^(−1) to canvas size (ultra sparce lines, dot like lenght)
+
+      int x0 = int(random(0, 700));
+      int y0 = int(random(0, 700));
+      int x1 = -1;
+      while (x1 < 0 || x1 > 700) {
+        x1 = int(random(x0-r, x0+r));
+      }
+      int y1 = -1;
+      while (y1 < 0 || y1 > 700) {
+        y1 = int(random(y0-r, y0+r));
+      }
+      filetxt[i] = x0+" "+y0+" "+x1+" "+y1;
+    }
+    */
   } else {
     String filepath = selection.getAbsolutePath();
     filename = selection.getName();
@@ -152,21 +176,21 @@ void setup() {
   output = createWriter("output.txt");
   output.println("Number of line segments = "+n);
   for (Segment line : lineSegment) {
-    output.println(line.toString());
+    //output.println(line.toString()); //pretty version
+    output.println((int)line.a.x +" "+(int)line.a.y +" "+(int)line.b.x +" "+(int)line.b.y); //original coord
   }
   output.println();
   output.println("Number of checks = "+number_of_checks);
   output.println("Execution Time ("+repeatProcess+"x) = "+(float)executionTime/1000000 + " milliseconds");
   output.println("Line intersections = "+intersectionPoints.size());
+  for (Point p : intersectionPoints) {
+    output.print(p.toString()+"; ");
+  }
 
   println("\nNumber of checks = "+number_of_checks);
   println("Execution Time ("+repeatProcess+"x) = "+(float)executionTime/1000000 + " milliseconds");
   println("Line intersections = "+intersectionPoints.size());
 
-  for (Point p : intersectionPoints) {
-    //println(p.toString());
-    output.println(p.toString());
-  }
   output.flush();
   output.close();
   startTime = System.currentTimeMillis();
@@ -174,7 +198,7 @@ void setup() {
 
 void draw() {
   int x0, y0, x1, y1;
-  //if (currentLine == 0 && index == 0) delay(1000);
+  if (currentLine == 0 && index == 0) delay(4000);
 
   background(0);
   color green = color(0, 255, 0);
