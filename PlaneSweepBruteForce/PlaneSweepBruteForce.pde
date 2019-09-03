@@ -157,8 +157,9 @@ void setup() {
 
     intersectionPoints = new HashSet<Point>(); //so that duplicates don't get added.
     number_of_checks = 0;
-    //brute force to find intersections
-    for (int i = 0; i < n; i++) {
+    //brute force to find intersections with no redudant check (each element checks each other only once)
+    //https://youtu.be/75Cbkoo4Gwg?t=1108
+    for (int i = 0; i < n-1; i++) {
       for (int j = i + 1; j < n; j++) {
         number_of_checks++;
         if (lineSegment[i].intersect( lineSegment[j]) != null) {
@@ -198,7 +199,7 @@ void setup() {
 
 void draw() {
   int x0, y0, x1, y1;
-  if (currentLine == 0 && index == 0) delay(4000);
+  if (currentLine == 0 && index == 0) delay(3000);
 
   background(0);
   color green = color(0, 255, 0);
