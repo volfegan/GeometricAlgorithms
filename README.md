@@ -41,7 +41,7 @@ All the time measurements are the running the program x 1000 in a loop, to accom
 
 ![Plane Sweep Intersections- Number of segments Vs Processing Time for a random length generated segment](imgs/PlaneSweepIntersections_Number_of_segments_Vs_Time_random_lines.png)
 
-In the graph, we see the Bentley-Ottmann algorithm is less efficient than the bruteforce search until around 200 segment lines (each measure is spaced by 100). The number of checks in the brute force increases as expected O(n²) (see 1st graph above), on the other hand, the Bentley-Ottmann algorithm the number of events grows somewhat linearly for this case. But since for each event there are a lot happening: writing/deleting/get operations in the eventQ and statusT, it is much more demanding than a simple intersection check from the bruteforce operation.
+In the graph, we see the Bentley-Ottmann algorithm is less efficient than the bruteforce search until around 200 segment lines (each measure is spaced by 100). The number of checks in the brute force increases as expected O(n²) (see 1st graph above), on the other hand, the Bentley-Ottmann algorithm the number of events grows somewhat linearly for this case. An event consist of handling segments start points, end poings and intersetions. But since for each event there are a lot happening: write/delete/get operations in the eventQ and statusT, it is much more demanding than a simple intersection check from the bruteforce operation.
 
 ![Plane Sweep Intersections- Number of segments Vs events](imgs/PlaneSweepIntersections_No._of_segments_Vs._No._of_events.png)
 
@@ -73,6 +73,9 @@ With this r, the length of the segment lines are so small (near zero), they are 
 
 ![Plane Sweep Intersections- Number of segments Vs Processing Time for a random segments (x,y)->([x−r,x+r]×[y−r,y+r]), r ~ n^(−1)](imgs/PlaneSweepIntersections_Number_of_segments_Vs_Time_R_n^(-1).png)
 
+
+* Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
+-> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was quite redudant as each line searches the others n(n-1). In fact it is possible to do a loop that one line does not repeat the search for its twin pair, like (s1 x s2) do, but do not (s2 x s1) as it has the same results. This will cut the search in 1/2, so n(n-1)/2.
 
 \- \- \-
 
