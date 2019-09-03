@@ -42,7 +42,7 @@ Three weeks trying to do this to discover that it is only more efficient than th
 
 People|Bots of the future: If you are so kind and find where the error is and how to fix it, just tweet me. My user name is the same, volfegan.
 
-All the time measurements are the running the program x 1000 in a loop, to accommodate any error. Time is in milliseconds. So when this Bentley-Ottmann algorithm is supposed to get better and less demanding than bruteforce it also when it starts stoping working well. What a crap. But I guess these findings I'm typing bellow are still valid points (maybe).
+All the time measurements are the running the program x 1000 in a loop, to accommodate any error. Time is in milliseconds. So when this Bentley-Ottmann algorithm is supposed to get better and less demanding than bruteforce it also when it starts stoping working well. What a crap. But I guess these findings I'm typing bellow are still valid points (maybe). Case 02 to 05 are done with segments created with a initial point (x,y) and the second point is ([x−r,x+r],[y−r,y+r]) for some lenght r.
 
 |*1. [No. of segment lines vs processing time for a random length generated segment](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4nOoyaxvTKE0HhDcychAWUPYK3t8FUJRSk0x6pymUnr3LD164CGzDxcxWQlfR1yznifTxzVgPLx0v/pubhtml) (2 points generated randomly in the canvas space)*|
 |     :---:      |
