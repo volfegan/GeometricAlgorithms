@@ -32,6 +32,12 @@ This implementation is heavily based on [valenpe7's bentley-ottmann](https://git
  * pseudo code: http://geomalgorithms.com/a09-_intersect-3.html
  * pseudo code: https://en.wikipedia.org/wiki/Bentley%E2%80%93Ottmann_algorithm#Detailed_algorithm
  
+Visualization of Sweep Line Intersections search by Bentley-Ottmann algorithm
+
+[![Visualization of Sweep Line Intersections search by Bentley-Ottmann algorithm](https://i.ytimg.com/vi/58cO-fBMEWk/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDfIzCWQu1G5u-3_SH19aOhjJK_ew)](https://www.youtube.com/watch?v=58cO-fBMEWk)
+
+(50 lines, 213 intersections found, 313 events)
+
 Three weeks trying to do this to discover that it is only more efficient than the bruteforce method after 200 random generated segment lines are used. And by doing efficiency measurement tests I discovered that my implementation of Bentley-Ottmann does not work properlly if there are too much dense segments it starts to miss intersections. Really a fuck, but I am tired of fixing this shit for a 4th week. It is probably how the sort of segments lines, on 'value' field is done, but I don't know a way to fix. It still works for not so dense lines, like less than 100 random lenght lines in a canvas of 700x700, but I would not trust this implemetation. I passed the [Coursera geometric-algorithms course](https://www.coursera.org/learn/geometric-algorithms) (max case was 25 segment lines) using it, but don't use without knowing where it's the problem and how to fix. This will probably rot on this repository.
 
 All the time measurements are the running the program x 1000 in a loop, to accommodate any error. Time is in milliseconds. So when this Bentley-Ottmann algorithm is supposed to get better and less demanding than bruteforce it also when it starts stoping working well. What a crap. But I guess these findings I'm typing bellow are still valid points (maybe).
