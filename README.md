@@ -2,7 +2,7 @@
 Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf).
 
 
-#### Brute Force Plane sweep
+#### Brute Force to find segment intersectons
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
 
 | *x0*  |  *y0* |  *x1* |  *y1* |
@@ -26,7 +26,7 @@ Although it looks very inefficient, the number of checks in the brute force incr
 ![BruteForce method- Number of segments Vs checks](imgs/PlaneSweepBruteForce_Number_of_segments_Vs_checks.png)
 
 
-#### Plane sweep by Bentley-Ottmann algorithm
+#### Plane sweep to find segment intersectons by Bentley-Ottmann algorithm
 This implementation is heavily based on [valenpe7's bentley-ottmann](https://github.com/valenpe7/bentley-ottmann). Yeah, after the first two weeks I gave up trying to do this by myself (I see I was doing the compareTo() on segment class very naive so statusT was doing bananas), so kudos to user valenpe7. I remember being the guy that lent homework to others. Now I lurk GitHub for people that are better than me when I fail.
 
  * pseudo code: http://geomalgorithms.com/a09-_intersect-3.html
