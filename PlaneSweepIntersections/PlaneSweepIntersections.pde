@@ -25,9 +25,9 @@ int scanLine = 0;
 void fileSelected(File selection) {
   if (selection == null) {
     print("No file selected. ");
-    int linesQty = 100;
     //when cancel file selection we create some random lines
-    //int linesQty = int(random(2, 50));
+    int linesQty = int(random(2, 50));
+    //int linesQty = 100;
     println(linesQty + " random segments lines created:");
     int screenSize = 900;
     filetxt = new String[linesQty];
