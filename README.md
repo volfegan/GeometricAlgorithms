@@ -83,7 +83,7 @@ With this r, the length of the segment lines are so small (near zero), they are 
 
 
 * Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
--> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was quite redudant as each line searches the others n(n-1). In fact it is possible to do a loop that one line does not repeat the search for its twin pair, like (s1 x s2) do, but do not (s2 x s1) as it has the same results. This and other little hacks will cut the search to n(n-1)/2 and so the processing time in 1/2. Just see all those graphs above and halve the bruteforce times to see how better it would be (the bruteforce graphs were done with brute force naive, everyone against everyone but itself). In fact, use bruteforce for anything less than 2000 segments using this n(n-1)/2 loop. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
+-> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was the most efficient way to do the searches n(n-1)/2; each line checks against the others only once. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
 
 
 \- \- \-
