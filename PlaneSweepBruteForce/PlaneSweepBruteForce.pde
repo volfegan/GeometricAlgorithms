@@ -239,7 +239,7 @@ void draw() {
     Point p_intersection = lineSegment[otherLine].intersect( lineSegment[index]);
     showPoints.add(p_intersection);
   }
-  println(index+" "+otherLine+" "+continueSelection);
+  //println(index+" "+otherLine+" "+continueSelection);
   //Control line intersection search on brute force
   //search indexes: [otherLine, index] created without redudant repetitions
   //last iteration
