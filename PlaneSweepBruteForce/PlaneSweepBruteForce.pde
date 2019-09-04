@@ -31,7 +31,7 @@ void fileSelected(File selection) {
     print("No file selected. ");
     //when cancel file selection we create some random lines
     int linesQty = int(random(2, 50));
-    //int linesQty = 50;
+    //int linesQty = 100;
     println(linesQty + " random segments lines created:");
     filetxt = new String[linesQty];
     //generate points method 01 (eval efficiency random segments)
@@ -199,7 +199,7 @@ void setup() {
 
 void draw() {
   int x0, y0, x1, y1;
-  //if (otherLine == 0 && index == 0) delay(3000);
+  if (otherLine == 0 && index == 0) delay(3000);
 
   background(0);
   color green = color(0, 255, 0);
@@ -239,24 +239,22 @@ void draw() {
     Point p_intersection = lineSegment[otherLine].intersect( lineSegment[index]);
     showPoints.add(p_intersection);
   }
+  println(index+" "+otherLine+" "+continueSelection);
   //Control line intersection search on brute force
   //search indexes: [otherLine, index] created without redudant repetitions
+  //last iteration
+  if (otherLine >= lineSegment.length-1 && index >= lineSegment.length-2) {
+    continueSelection = false;
+  }
   //frameCount % speedReduction to reduce the speed of animation
   if (frameCount % speedReduction == 0) {
-    //last iteration
-    if (otherLine == lineSegment.length-2 && index == lineSegment.length-1) {
-      continueSelection = false;
-    }
-    if (continueSelection && otherLine < lineSegment.length-2) {
+    if (continueSelection && otherLine < lineSegment.length-1) {
       otherLine++;
     } else {
-      if (index < lineSegment.length-1) {
+      if (index < lineSegment.length-2) {
         startTime = System.currentTimeMillis();
-        if (index < otherLine && otherLine < lineSegment.length-2) {
-          index = otherLine + 1;
-        }
         index++;
-        otherLine = 0;
+        otherLine = index+1;
       }
     }
   }
