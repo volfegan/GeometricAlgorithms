@@ -31,6 +31,7 @@ This implementation is heavily based on [valenpe7's bentley-ottmann](https://git
 
  * pseudo code: http://geomalgorithms.com/a09-_intersect-3.html
  * pseudo code: https://en.wikipedia.org/wiki/Bentley%E2%80%93Ottmann_algorithm#Detailed_algorithm
+ * http://www.cs.cmu.edu/afs/cs/academic/class/15451-s16/www/lectures/lec26-segments-intersect.pdf
  
 Visualization of Sweep Line Intersections search by Bentley-Ottmann algorithm
 
