@@ -22,16 +22,16 @@ long endTime = 0;
 PrintWriter output;
 boolean continueSelection = true;
 int index = 0;
-int currentLine = 0;
+int otherLine = 0;
 //there is no file validation, so any non-file txt selected will crash the program
 //txt must contain only numbers formated as: "x0 y0 x1 y1" to create lines
 //if no file is selected, 2~25 random points will be created
 void fileSelected(File selection) {
   if (selection == null) {
     print("No file selected. ");
-    int linesQty = 100;
     //when cancel file selection we create some random lines
-    //int linesQty = int(random(2, 50));
+    int linesQty = int(random(2, 50));
+    //int linesQty = 50;
     println(linesQty + " random segments lines created:");
     filetxt = new String[linesQty];
     //generate points method 01 (eval efficiency random segments)
@@ -44,25 +44,25 @@ void fileSelected(File selection) {
     }
     /*
     //generate points method 02 (eval efficiency for any length r size segment)
-    for (int i = 0; i < linesQty; i++) {
-      //int r = int(random(0, 699)); //r ~ 1 to canvas size
-      int r = int(random(0, 699/sqrt(sqrt(linesQty)) )); //r ~ n^(−1/4) to canvas size (sparce lines)
-      //int r = int(random(0, 699/sqrt(linesQty) )); //r ~ n^(−1/2) to canvas size (very sparce lines)
-      //int r = int(random(0, 699/linesQty )); //r ~ n^(−1) to canvas size (ultra sparce lines, dot like lenght)
-
-      int x0 = int(random(0, 700));
-      int y0 = int(random(0, 700));
-      int x1 = -1;
-      while (x1 < 0 || x1 > 700) {
-        x1 = int(random(x0-r, x0+r));
-      }
-      int y1 = -1;
-      while (y1 < 0 || y1 > 700) {
-        y1 = int(random(y0-r, y0+r));
-      }
-      filetxt[i] = x0+" "+y0+" "+x1+" "+y1;
-    }
-    */
+     for (int i = 0; i < linesQty; i++) {
+     //int r = int(random(0, 699)); //r ~ 1 to canvas size
+     int r = int(random(0, 699/sqrt(sqrt(linesQty)) )); //r ~ n^(−1/4) to canvas size (sparce lines)
+     //int r = int(random(0, 699/sqrt(linesQty) )); //r ~ n^(−1/2) to canvas size (very sparce lines)
+     //int r = int(random(0, 699/linesQty )); //r ~ n^(−1) to canvas size (ultra sparce lines, dot like lenght)
+     
+     int x0 = int(random(0, 700));
+     int y0 = int(random(0, 700));
+     int x1 = -1;
+     while (x1 < 0 || x1 > 700) {
+     x1 = int(random(x0-r, x0+r));
+     }
+     int y1 = -1;
+     while (y1 < 0 || y1 > 700) {
+     y1 = int(random(y0-r, y0+r));
+     }
+     filetxt[i] = x0+" "+y0+" "+x1+" "+y1;
+     }
+     */
   } else {
     String filepath = selection.getAbsolutePath();
     filename = selection.getName();
@@ -199,7 +199,7 @@ void setup() {
 
 void draw() {
   int x0, y0, x1, y1;
-  if (currentLine == 0 && index == 0) delay(3000);
+  //if (otherLine == 0 && index == 0) delay(3000);
 
   background(0);
   color green = color(0, 255, 0);
@@ -212,13 +212,12 @@ void draw() {
   for (Line line : lines) {
     line.display();
   }
-
-  //Current line segment selected
-  if (continueSelection && currentLine <= lineSegment.length-1) {
-    x0 = int((float)lineSegment[currentLine].a.x);
-    y0 = int((float)lineSegment[currentLine].a.y);
-    x1 = int((float)lineSegment[currentLine].b.x);
-    y1 = int((float)lineSegment[currentLine].b.y);
+  //Current selected line segment
+  if (continueSelection && index <= lineSegment.length-1) {
+    x0 = int((float)lineSegment[index].a.x);
+    y0 = int((float)lineSegment[index].a.y);
+    x1 = int((float)lineSegment[index].b.x);
+    y1 = int((float)lineSegment[index].b.y);
     selectLine(x0, y0, x1, y1, yellowFade, 10);
     //target shrinking effect
     if (System.currentTimeMillis() - startTime < 400) {
@@ -226,34 +225,38 @@ void draw() {
       if (System.currentTimeMillis() - startTime < 200)
         selectLine(x0, y0, x1, y1, redFade, 20);
     }
-    //last iteration
-    if (currentLine == lineSegment.length-1 && index == lineSegment.length-1) {
-      continueSelection = false;
-    }
   }
-  //Other line segment checking against selected line
-  if (continueSelection && index <= lineSegment.length-1 && currentLine != index) {
-    x0 = int((float)lineSegment[index].a.x);
-    y0 = int((float)lineSegment[index].a.y);
-    x1 = int((float)lineSegment[index].b.x);
-    y1 = int((float)lineSegment[index].b.y);
+  //Other line segment checking against selected line segment
+  if (continueSelection && otherLine <= lineSegment.length-1 && index != otherLine) {
+    x0 = int((float)lineSegment[otherLine].a.x);
+    y0 = int((float)lineSegment[otherLine].a.y);
+    x1 = int((float)lineSegment[otherLine].b.x);
+    y1 = int((float)lineSegment[otherLine].b.y);
     selectLine(x0, y0, x1, y1, cyanFade, 10);
   }
-  if (continueSelection && lineSegment[currentLine].intersect( lineSegment[index]) != null) {
-    Point p_intersection = lineSegment[currentLine].intersect( lineSegment[index]);
+  //find intersection
+  if (continueSelection && lineSegment[otherLine].intersect( lineSegment[index]) != null) {
+    Point p_intersection = lineSegment[otherLine].intersect( lineSegment[index]);
     showPoints.add(p_intersection);
   }
   //Control line intersection search on brute force
-  //
+  //search indexes: [otherLine, index] created without redudant repetitions
   //frameCount % speedReduction to reduce the speed of animation
   if (frameCount % speedReduction == 0) {
-    if (continueSelection && index < lineSegment.length-1) {
-      index++;
+    //last iteration
+    if (otherLine == lineSegment.length-2 && index == lineSegment.length-1) {
+      continueSelection = false;
+    }
+    if (continueSelection && otherLine < lineSegment.length-2) {
+      otherLine++;
     } else {
-      if (currentLine < lineSegment.length-1) {
+      if (index < lineSegment.length-1) {
         startTime = System.currentTimeMillis();
-        currentLine++;
-        index = 0;
+        if (index < otherLine && otherLine < lineSegment.length-2) {
+          index = otherLine + 1;
+        }
+        index++;
+        otherLine = 0;
       }
     }
   }
