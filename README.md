@@ -1,8 +1,11 @@
 # Geometric Algorithms
 Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf).
 
+* Find line segments intersections by Brute Force method
+* Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
+* Delaunay Triangulation
 
-#### Brute Force to find segment intersections
+#### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
 
 | *x0*  |  *y0* |  *x1* |  *y1* |
@@ -31,6 +34,7 @@ This implementation is heavily based on [valenpe7's bentley-ottmann](https://git
 
  * pseudo code: http://geomalgorithms.com/a09-_intersect-3.html
  * pseudo code: https://en.wikipedia.org/wiki/Bentley%E2%80%93Ottmann_algorithm#Detailed_algorithm
+ * http://www.cs.cmu.edu/afs/cs/academic/class/15451-s16/www/lectures/lec26-segments-intersect.pdf
  
 Visualization of Sweep Line Intersections search by Bentley-Ottmann algorithm
 
@@ -83,8 +87,8 @@ With this r, the length of the segment lines are so small (near zero), they are 
 
 
 * Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
--> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was quite redudant as each line searches the others n(n-1). In fact it is possible to do a loop that one line does not repeat the search for its twin pair, like (s1 x s2) do, but do not (s2 x s1) as it has the same results. This and other little hacks will cut the search to n(n-1)/2 and so the processing time in 1/2. Just see all those graphs above and halve the bruteforce times to see how better it would be (the bruteforce graphs were done with brute force naive, everyone against everyone but itself). In fact, use bruteforce for anything less than 2000 segments using this n(n-1)/2 loop. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
-
+-> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was the most efficient way to do the searches n(n-1)/2; each line checks against the others only once. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
+From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and R-tree (https://en.wikipedia.org/wiki/R-tree) are better for this task.
 
 \- \- \-
 
