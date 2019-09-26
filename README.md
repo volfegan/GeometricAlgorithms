@@ -1,9 +1,15 @@
 # Geometric Algorithms
 Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf).
 
+* Pseudo-Triangulation
+* Delaunay Triangulation (working)
 * Find line segments intersections by Brute Force method
 * Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
-* Delaunay Triangulation
+
+#### Pseudo-Triangulation
+As I wasted 3 weeks studying Delaunay Triangulation, I just stopped and started from a easier step point. The PseudoTriangulation is done by efficient bruteForce method, where a line is draw between two point only when it less than some maxDist. If there are n points, this search is done on n*(n-1)/2 steps. The whole explanations can be found at the end of this video [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg).
+
+The sketch is pretty ineficient. At 150 points and maxDist=100, we get around 60 frames/s. At 300 points same maxDist, 25 frames/s, 1000 points, 2 frames/s. Probably using some QuadTree structure we can improve the performance.
 
 #### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
