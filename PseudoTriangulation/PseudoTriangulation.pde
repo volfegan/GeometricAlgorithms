@@ -21,6 +21,15 @@ public void keyPressed() {
       showFrameRate = true;
     }
   }
+  //reset all points
+  if (key == 'r') {
+    nodePoints.clear();
+    for (int i = 0; i < pointsQty; i++) {
+      int x0 = int(random(0, width));
+      int y0 = int(random(0, height));
+      nodePoints.add(new Point(x0, y0));
+    }
+  }
 }
 
 
