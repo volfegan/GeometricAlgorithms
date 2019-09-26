@@ -11,6 +11,10 @@ As I wasted 3 weeks studying Delaunay Triangulation, I just stopped and started 
 
 The sketch is pretty inefficient. At 150 points and maxDist=100, we get around 60 frames/s. At 300 points same maxDist, 25 frames/s, 1000 points, 2 frames/s. Probably using some QuadTree structure we can improve the performance. 
 
+Visualization of this Pseudo-Triangulation is bellow:
+
+[![Pseudo-Triangulation by most efficient brute force method](https://i.ytimg.com/vi/iykU_Oh-sQc/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCorlAeXRp-Osxo3wlPsiycIrrYew)](https://www.youtube.com/watch?v=iykU_Oh-sQc)
+
 #### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
 
