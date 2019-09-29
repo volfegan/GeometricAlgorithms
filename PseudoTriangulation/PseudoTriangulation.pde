@@ -1,12 +1,12 @@
 /**
- * This program implements some pseudoTriangulation using Points and Line class.
+ * This program implements some pseudoTriangulation using Point nodes and Line class.
  * The pseudoTriangulation is limited by some maxDist and the triangles intersect one another
  * @author Volfegan [Daniel L Lacerda]
  * 
  */
 
 ArrayList<Line> lines = new ArrayList<Line>();
-ArrayList<Point> nodePoints = new ArrayList<Point>();
+ArrayList<Node> nodePoints = new ArrayList<Node>();
 int maxDist = 100; //any distance above, the points will not connect
 int pointsQty = 150;
 
@@ -27,7 +27,7 @@ public void keyPressed() {
     for (int i = 0; i < pointsQty; i++) {
       int x0 = int(random(0, width));
       int y0 = int(random(0, height));
-      nodePoints.add(new Point(x0, y0));
+      nodePoints.add(new Node(x0, y0));
     }
   }
   //Triangulation Distance
@@ -37,6 +37,25 @@ public void keyPressed() {
   if (key == '-') {
     maxDist -= 10;
   }
+  //Add more points
+  if (key == 'a') {
+    int addPoints = 10;
+    pointsQty += addPoints;
+    for (int i = 0; i < addPoints; i++) {
+      int x0 = int(random(0, width));
+      int y0 = int(random(0, height));
+      nodePoints.add(new Node(x0, y0));
+    }
+  }
+  //Subtract points
+  if (key == 's') {
+    int removePoints = 10;
+    pointsQty -= removePoints;
+    for (int i = 0; i < removePoints; i++) {
+      nodePoints.remove((nodePoints.size()-1));
+    }
+  }
+  
 }
 
 
@@ -49,7 +68,7 @@ void settings() {
     //print("(" + x0 + ", " + y0 + "); ");
 
     //create the points and put them in a list
-    nodePoints.add(new Point(x0, y0));
+    nodePoints.add(new Node(x0, y0));
   }
 
   width = 960;
@@ -72,9 +91,9 @@ void settings() {
   for (int a = 0; a < repeatProcess; a++) {
     number_of_checks = 0;
     for (int i = 0; i < nodePoints.size()-1; i++) {
-      Point nodeA = nodePoints.get(i);
+      Node nodeA = nodePoints.get(i);
       for (int j = i+1; j < nodePoints.size(); j++) {
-        Point nodeB = nodePoints.get(j);
+        Node nodeB = nodePoints.get(j);
         float dist = dist(nodeA.getX(), nodeA.getY(), nodeB.getX(), nodeB.getY());
         number_of_checks++;
         if (dist < maxDist) {
@@ -107,15 +126,15 @@ void settings() {
 void setup() {
   //initial canvas size is set on settings
   background(0);
-  for (Point p : nodePoints) {
+  for (Node p : nodePoints) {
     p.display();
   }
   //creates the lines between nodes when they are less than maxDist
   //the double loop is efficient bruteforce search - never repeats the nodes
   for (int i = 0; i < nodePoints.size()-1; i++) {
-    Point nodeA = nodePoints.get(i);
+    Node nodeA = nodePoints.get(i);
     for (int j = i+1; j < nodePoints.size(); j++) {
-      Point nodeB = nodePoints.get(j);
+      Node nodeB = nodePoints.get(j);
       float dist = dist(nodeA.getX(), nodeA.getY(), nodeB.getX(), nodeB.getY());
       if (dist < maxDist) {
         int alpha = round((1 - dist/maxDist)*255);
@@ -139,7 +158,7 @@ void draw() {
 
   lines.clear();
   background(0);
-  for (Point p : nodePoints) {
+  for (Node p : nodePoints) {
     p.display();
     p.update();
 
@@ -162,9 +181,9 @@ void draw() {
   //creates the lines between nodes when they are less than maxDist
   //the double loop is efficient bruteforce search - never repeats the nodes
   for (int i = 0; i < nodePoints.size()-1; i++) {
-    Point nodeA = nodePoints.get(i);
+    Node nodeA = nodePoints.get(i);
     for (int j = i+1; j < nodePoints.size(); j++) {
-      Point nodeB = nodePoints.get(j);
+      Node nodeB = nodePoints.get(j);
       float dist = dist(nodeA.getX(), nodeA.getY(), nodeB.getX(), nodeB.getY());
       if (dist < maxDist) {
         int alpha = round((1 - dist/maxDist)*255);

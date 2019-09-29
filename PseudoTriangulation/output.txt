@@ -1,5 +1,5 @@
 Number of points = 150
-Number of line segments = 487
+Number of line segments = 467
 
 Number of checks = 11175
-Execution Time (1000x) = 174.50575 milliseconds
+Execution Time (1000x) = 121.4958 milliseconds
