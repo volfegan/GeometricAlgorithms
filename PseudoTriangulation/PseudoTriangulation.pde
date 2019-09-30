@@ -110,6 +110,7 @@ void settings() {
   //printing to file
   output = createWriter("output.txt");
   output.println("Number of points = "+pointsQty);
+  output.println("Triangulation distance = "+maxDist);
   output.println("Number of line segments = "+lines.size());
   output.println();
   output.println("Number of checks = "+number_of_checks);
