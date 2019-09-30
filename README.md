@@ -7,10 +7,12 @@ Geometric Algorithms implemented in Java and Processing v3. Algorithms details c
 * Find line segments intersections by Brute Force method
 * Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
 
-#### QuadTrees
-One of the first data structures for orthogonal range searching was the quadtree, which the book discusses in Chapter 14 in the context of meshing. Unfortunately, the worst-case behavior of quadtrees is quite bad, but as the Coding Train made its implementation and explanation trivial, I don' care, it works: [CodingTrain QuadTree](https://github.com/CodingTrain/QuadTree). This stuff is so useful even I fixed an issue on their code base so it works properly. And to make someone do work for free for humanity you see this is worth a try. But I heard [R-tree](https://en.wikipedia.org/wiki/R-tree) are better.
+#### QuadTree
+One of the first data structures for orthogonal range searching was the quadtree, which the book discusses in Chapter 14 in the context of meshing. Unfortunately, the worst-case behavior of quadtrees is quite bad, but as the Coding Train made its implementation and explanation trivial, I don' care, it works: [CodingTrain QuadTree](https://github.com/CodingTrain/QuadTree). This stuff is so useful even I fixed an issue on their code base so it works properly, and then they deleted the processing version. And to make someone do work for free for humanity you see this is worth a try. But I heard [R-tree](https://en.wikipedia.org/wiki/R-tree) are better.
 
-The implementation here is a better version than the CodingTrain QuadTree. I used binary tree for the internal search (TreeSet) so we get log(n) speed on get, add, remove processes.
+The implementation here is a better version than the CodingTrain QuadTree processing version it was there before. I used binary tree for the internal search (TreeSet) so we get log(n) speed on get, add, remove processes. But don't expect this will make your program magically work super fast. The scenarios that a QuadTree increases performance are not many. Quadtree depends on particle distribution, size of the query range, so it can get less performative than some efficient brute force method really easy. 
+
+I know, so much work, so many classes for shit improvements if any.
 
 #### Pseudo-Triangulation
 As I wasted 3 weeks studying Delaunay Triangulation, I just stopped and started from an easier step point. The PseudoTriangulation is done by efficient bruteForce method, where a line is drawn between two points only when it less than some maxDist. If there are n points, this search is done on n*(n-1)/2 steps. The whole explanations can be found at the end of this video [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). This is far from some true triangulation as the points don't act as true vertex.
