@@ -12,20 +12,20 @@
 
 import java.util.TreeSet;
 
-class Quadtree {
-  Rectangle boundary;
-  int capacity; // max no. of points
-  TreeSet<Point> points ;
-  boolean divide = false;
-  Quadtree northeast; 
-  Quadtree northwest;
-  Quadtree southeast;
-  Quadtree southwest;
+public class Quadtree {
+  private Rectangle boundary;
+  private int capacity; // max no. of points
+  private TreeSet<Point> points ;
+  private boolean divide = false;
+  private Quadtree northeast; 
+  private Quadtree northwest;
+  private Quadtree southeast;
+  private Quadtree southwest;
 
   public Quadtree(Rectangle rect, int cap) {
     this.boundary = rect;
     this.capacity = cap;
-    points = new TreeSet<Point>();
+    this.points = new TreeSet<Point>();
   }
 
   public boolean contains(Point p) {
@@ -72,37 +72,68 @@ class Quadtree {
     this.points.clear();
   }
   
-  private void query(Rectangle range, TreeSet<Point> points) {
+  private void query(Rectangle range, TreeSet<Point> findPoints) {
     if (range.intersects(this.boundary)) {
       for (Point p : this.points) {
         if (range.contains(p))
-          points.add(p);
+          findPoints.add(p);
       }
       if (this.divide) {
-        this.northeast.query(range, points); 
-        this.northwest.query(range, points); 
-        this.southeast.query(range, points); 
-        this.southwest.query(range, points);
+        this.northeast.query(range, findPoints); 
+        this.northwest.query(range, findPoints); 
+        this.southeast.query(range, findPoints); 
+        this.southwest.query(range, findPoints);
+      }
+    }
+  }
+  
+  private void query(Circle range, TreeSet<Point> findPoints) {
+    if (range.intersects(this.boundary)) {
+      for (Point p : this.points) {
+        if (range.contains(p))
+          findPoints.add(p);
+      }
+      if (this.divide) {
+        this.northeast.query(range, findPoints); 
+        this.northwest.query(range, findPoints); 
+        this.southeast.query(range, findPoints); 
+        this.southwest.query(range, findPoints);
       }
     }
   }
 
-  
   public TreeSet<Point> query(Rectangle range) {
-    TreeSet<Point> points = new TreeSet<Point>();
+    TreeSet<Point> findPoints = new TreeSet<Point>();
     if (range.intersects(this.boundary)) {
       for (Point p : this.points) {
         if (range.contains(p))
-          points.add(p);
+          findPoints.add(p);
       }
       if (this.divide) {
-        this.northeast.query(range, points); 
-        this.northwest.query(range, points); 
-        this.southeast.query(range, points); 
-        this.southwest.query(range, points);
+        this.northeast.query(range, findPoints); 
+        this.northwest.query(range, findPoints); 
+        this.southeast.query(range, findPoints); 
+        this.southwest.query(range, findPoints);
       }
     }
-    return points;
+    return findPoints;
+  }
+
+  public TreeSet<Point> query(Circle range) {
+    TreeSet<Point> findPoints = new TreeSet<Point>();
+    if (range.intersects(this.boundary)) {
+      for (Point p : this.points) {
+        if (range.contains(p))
+          findPoints.add(p);
+      }
+      if (this.divide) {
+        this.northeast.query(range, findPoints); 
+        this.northwest.query(range, findPoints); 
+        this.southeast.query(range, findPoints); 
+        this.southwest.query(range, findPoints);
+      }
+    }
+    return findPoints;
   }
 
   //this method requires Processing functions
