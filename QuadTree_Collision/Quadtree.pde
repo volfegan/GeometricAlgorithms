@@ -11,7 +11,7 @@
 
 import java.util.TreeSet;
 
-public class Quadtree {
+class Quadtree {
   Rectangle boundary;
   int capacity; // max no. of points
   TreeSet<Point> points ;
@@ -24,7 +24,7 @@ public class Quadtree {
   public Quadtree(Rectangle rect, int cap) {
     this.boundary = rect;
     this.capacity = cap;
-    this.points = new TreeSet<Point>();
+    points = new TreeSet<Point>();
   }
 
   public boolean contains(Point p) {
@@ -71,36 +71,37 @@ public class Quadtree {
     this.points.clear();
   }
   
-  private void query(Rectangle range, TreeSet<Point> findPoints) {
+  private void query(Rectangle range, TreeSet<Point> points) {
     if (range.intersects(this.boundary)) {
       for (Point p : this.points) {
         if (range.contains(p))
-          findPoints.add(p);
+          points.add(p);
       }
       if (this.divide) {
-        this.northeast.query(range, findPoints); 
-        this.northwest.query(range, findPoints); 
-        this.southeast.query(range, findPoints); 
-        this.southwest.query(range, findPoints);
+        this.northeast.query(range, points); 
+        this.northwest.query(range, points); 
+        this.southeast.query(range, points); 
+        this.southwest.query(range, points);
       }
     }
   }
 
+  
   public TreeSet<Point> query(Rectangle range) {
-    TreeSet<Point> findPoints = new TreeSet<Point>();
+    TreeSet<Point> points = new TreeSet<Point>();
     if (range.intersects(this.boundary)) {
       for (Point p : this.points) {
         if (range.contains(p))
-          findPoints.add(p);
+          points.add(p);
       }
       if (this.divide) {
-        this.northeast.query(range, findPoints); 
-        this.northwest.query(range, findPoints); 
-        this.southeast.query(range, findPoints); 
-        this.southwest.query(range, findPoints);
+        this.northeast.query(range, points); 
+        this.northwest.query(range, points); 
+        this.southeast.query(range, points); 
+        this.southwest.query(range, points);
       }
     }
-    return findPoints;
+    return points;
   }
 
   //this method requires Processing functions
