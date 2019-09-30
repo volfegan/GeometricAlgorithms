@@ -7,8 +7,8 @@
 
 ArrayList<Line> lines = new ArrayList<Line>();
 ArrayList<Node> nodePoints = new ArrayList<Node>();
-int maxDist = 100; //any distance above, the points will not connect
-int pointsQty = 150;
+int maxDist = 50; //any distance above, the points will not connect
+int pointsQty = 1000;
 
 boolean showFrameRate = true;
 
@@ -115,6 +115,12 @@ void settings() {
   output.println();
   output.println("Number of checks = "+number_of_checks);
   output.println("Execution Time ("+repeatProcess+"x) = "+(float)executionTime/1000000 + " milliseconds");
+  
+  println("Triangulation distance = "+maxDist);
+  println("Number of line segments = "+lines.size());
+  println("Number of checks = "+number_of_checks);
+  println("Execution Time ("+repeatProcess+"x) = "+(float)executionTime/1000000 + " milliseconds");
+  
   output.flush();
   output.close();
   lines.clear();
