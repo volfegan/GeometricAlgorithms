@@ -6,6 +6,8 @@
 //https://www.youtube.com/watch?v=OJxEcs0w_kE
 //Part 2: 
 //https://www.youtube.com/watch?v=QQx_NmCIuCY
+//Part 3: 
+//https://www.youtube.com/watch?v=z0YFFg_nBjw
 
 
 class Point implements Comparable<Point>  {
