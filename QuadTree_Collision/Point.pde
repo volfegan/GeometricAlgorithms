@@ -1,4 +1,4 @@
-// Daniel Shiffman, modified by Volfegan
+// Daniel Shiffman, modified and improved by Volfegan
 // http://codingtra.in
 // http://patreon.com/codingtrain
 //Videos
@@ -7,7 +7,6 @@
 //Part 2: 
 //https://www.youtube.com/watch?v=QQx_NmCIuCY
 
-//This code is only part 1 video of the challenge. 
 
 class Point implements Comparable<Point>  {
   double x;

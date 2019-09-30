@@ -1,4 +1,4 @@
-// Daniel Shiffman
+// Daniel Shiffman, modified and improved by Volfegan
 // http://codingtra.in
 // http://patreon.com/codingtrain
 //Videos
@@ -6,8 +6,6 @@
 //https://www.youtube.com/watch?v=OJxEcs0w_kE
 //Part 2: 
 //https://www.youtube.com/watch?v=QQx_NmCIuCY
-
-//This code is part 2 video of the challenge. 
 
 
 class Rectangle {
