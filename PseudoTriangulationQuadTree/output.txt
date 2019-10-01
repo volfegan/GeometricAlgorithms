@@ -2,10 +2,10 @@ Number of points = 1000
 Triangulation distance = 40
 
 Brute Force Method
-Number of line segments = 3465
+Number of line segments = 3427
 Number of checks = 499500
 
 Quadtree Method
-Number of line segments = 3474
-Number of checks = 3474
+Number of line segments = 3433
+Number of checks = 7886
 
