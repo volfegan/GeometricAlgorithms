@@ -39,7 +39,7 @@ public void setup () {
   }
   Rectangle range = new Rectangle(width/2, height/2, width*2, height*2);
   TreeSet<Point> points = qtree.query(range);
-  println("Query range = Canvas size = "+width+", "+height);
+  println("Canvas size = "+width+", "+height);
   println("Points created = "+maxPoints);
   println("Points found = "+points.size());
 }
