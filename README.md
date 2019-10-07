@@ -1,8 +1,8 @@
 # Geometric Algorithms
 Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf).
 
-* QuadTrees
-* Pseudo-Triangulation
+* QuadTree
+* Pseudo-Triangulation by Brute Force method or using QuadTree search
 * Delaunay Triangulation (working)
 * Find line segments intersections by Brute Force method
 * Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
@@ -10,18 +10,27 @@ Geometric Algorithms implemented in Java and Processing v3. Algorithms details c
 #### QuadTree
 One of the first data structures for orthogonal range searching was the quadtree, which the book discusses in Chapter 14 in the context of meshing. Unfortunately, the worst-case behavior of quadtrees is quite bad, but as the Coding Train made its implementation and explanation trivial, I don' care, it works: [CodingTrain QuadTree](https://github.com/CodingTrain/QuadTree). This stuff is so useful even I fixed an issue on their code base so it works properly, and then they deleted the processing version. And to make someone do work for free for humanity you see this is worth a try. But I heard [R-tree](https://en.wikipedia.org/wiki/R-tree) are better.
 
-The implementation here is a better version than the CodingTrain QuadTree processing version it was there before. I used binary tree for the internal search (TreeSet) so we get log(n) speed on get, add, remove processes. But don't expect this will make your program magically work super fast. The scenarios that a QuadTree increases performance are not many. Quadtree depends on particle distribution, size of the query range, so it can get less performative than some efficient brute force method really easy. 
+The implementation here is a better version than the CodingTrain's QuadTree processing version was. I used binary tree for the internal search (TreeSet) so we get log(n) speed on get, add, remove processes. I also included a circular range search besides the regular retangular range search. But don't expect this will make your program magically work super fast. The scenarios that a QuadTree increases performance are not many. Quadtree depends on particle distribution, size of the query range, so it can get less performative than some efficient brute force method really easy. 
 
-I know, so much work, so many classes for shit improvements if any.
+![QuadTree Demonstration](imgs/quadTreeDemonstration.gif)
 
-#### Pseudo-Triangulation
+I know, so much work, so many classes for shit improvements if any. All these algorithms are really getting in my nerve. They promise super efficiency but delivery less than the trivial implementation. I feel like I'm wasting my life on this.
+
+#### Pseudo-Triangulation using efficient Brute Force method
 As I wasted 3 weeks studying Delaunay Triangulation, I just stopped and started from an easier step point. The PseudoTriangulation is done by efficient bruteForce method, where a line is drawn between two points only when it less than some maxDist. If there are n points, this search is done on n*(n-1)/2 steps. The whole explanations can be found at the end of this video [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). This is far from some true triangulation as the points don't act as true vertex.
 
-The sketch is pretty inefficient. At 150 points and maxDist=100, we get around 60 frames/s. At 300 points same maxDist, 25 frames/s, 1000 points, 2 frames/s. Probably using some QuadTree structure we can improve the performance. 
+The sketch looks like it's pretty inefficient, but it is actually very good. At 150 points and maxDist=100, we get around 60 frames/s. At 300 points same maxDist, 25 frames/s, 1000 points, 2 frames/s. Probably using some QuadTree structure we can improve the performance. 
 
 Visualization of this Pseudo-Triangulation is bellow:
 
 [![Pseudo-Triangulation by most efficient brute force method](https://i.ytimg.com/vi/iykU_Oh-sQc/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLCorlAeXRp-Osxo3wlPsiycIrrYew)](https://www.youtube.com/watch?v=iykU_Oh-sQc)
+
+#### Pseudo-Triangulation using QuadTree search
+So by putting a QuadTree structure I expected at least some minor improvements, but no. Even using every trick I could come on, the QuadTree search only got the same level of performance than the efficient Brute Force method or worst. As a reminder, the efficient Brute Force makes the search for pair of points only once, and since there are no extra data structures being created, deleted, inserted, that is quite fast. For the QuadTree to do the same, even if its query gets only the nearby points, we still have to filter any repetitive pairs. To do that we need a list to catalogue those points, and adding the creation of the QuadTree object, internal search, catalogue the pair of points to decide if we add a line or not, even if we only have to do that for a small subset of points, those operations are quite expensive. And QuadTree have the tendency of only working with optimal efficiency only for a selected query range size and points distribution. So if the query size cannot be changed, like on this sketch, you get stuck on inefficient search.
+
+As for comparison, if we start with 1000 points, maxDist = 40, it gets some 10~15 frames/s. The same as the brute force, maybe a little less fast. Also, the brute force method will nedd 499500 inexpensive checks to generate 3427 unique line segments. For the same point set, using the QuadTree system, the number of checks = 7886 to generate 3433 lines. I don't get this discrepancy for the same point set, but it is not worth investigating 6 extra lines created in a thousand points (most probably is the way I am generating ids of each line). For this animation in particular, the creation on every frame of lines are more computationally expensive than the search of pair of points proximity. So the only way I can see for the QuadTree could beat the efficient Brute force method is by merging the Node Class with the Point class, so we don't need to create new Points every frame, only update their location. But that would make the QuadTree less generic, and I'm not sure if we really could get so much of a better performance, but probably it would. I should spill some graphs comparing the QuadTree version the vanilla one, but I am getting a bit dishearted by the lack of gains for so many code inserted; so many classes for zero. Just watch the video and enjoy and never underestimate the power of efficient Brute Force.
+
+[![Pseudo-Triangulation using QuadTree search](https://i.ytimg.com/vi/azchQMfBY_Y/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDI5irmKTnuaRenSUZajLn4oaOLkQ)](https://www.youtube.com/watch?v=azchQMfBY_Y)
 
 #### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
