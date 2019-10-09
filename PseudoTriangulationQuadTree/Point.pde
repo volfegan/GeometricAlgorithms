@@ -47,10 +47,12 @@ public class Point implements Comparable<Point>  {
   }
   //the compareTo is a requirement for usage of Binary Tree
   public int compareTo(Point p) {
-    if (this.x * width + this.y > p.x * width + p.y) {
+    int H1 = 0x8da6b343; //an arbitrarily chosen prime
+    
+    if (this.x * H1 + this.y > p.x * H1 + p.y) {
       return 1;
     }
-    if (this.x * width + this.y < p.x * width + p.y) {
+    if (this.x * H1 + this.y < p.x * H1 + p.y) {
       return -1;
     }
     return 0;
