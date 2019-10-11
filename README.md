@@ -1,8 +1,9 @@
 # Geometric Algorithms
-Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf).
+Geometric Algorithms implemented in Java and Processing v3. Algorithms details can be found at: [Computational Geometry - Algorithms and Applications, 3rd Ed](https://people.inf.elte.hu/fekete/algoritmusok_msc/terinfo_geom/konyvek/Computational%20Geometry%20-%20Algorithms%20and%20Applications,%203rd%20Ed.pdf). I also used this book as reference, [Real-Time Collision Detection](http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Christer_Ericson-Real-Time_Collision_Detection-EN.pdf), to at least know what exists in the field.
 
 * QuadTree
 * Pseudo-Triangulation by Brute Force method or using QuadTree search
+* Spatial Hashing or [Spatial Partitioning Bin](https://en.wikipedia.org/wiki/Bin_(computational_geometry))
 * Delaunay Triangulation (working)
 * Find line segments intersections by Brute Force method
 * Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
@@ -13,6 +14,7 @@ One of the first data structures for orthogonal range searching was the quadtree
 The implementation here is a better version than the CodingTrain's QuadTree processing version was. I used binary tree for the internal search (TreeSet) so we get log(n) speed on get, add, remove processes. I also included a circular range search besides the regular retangular range search. But don't expect this will make your program magically work super fast. The scenarios that a QuadTree increases performance are not many. Quadtree depends on particle distribution, size of the query range, so it can get less performative than some efficient brute force method really easy. 
 
 ![QuadTree Demonstration](imgs/quadTreeDemonstration.gif)
+(canvas size: 1000x400) 1000 points created
 
 I know, so much work, so many classes for shit improvements if any. All these algorithms are really getting in my nerve. They promise super efficiency but delivery less than the trivial implementation. I feel like I'm wasting my life on this.
 
@@ -31,6 +33,15 @@ So by putting a QuadTree structure I expected at least some minor improvements, 
 As for comparison, if we start with 1000 points, maxDist = 40, it gets some 10~15 frames/s. The same as the brute force, maybe a little less fast. Also, the brute force method will nedd 499500 inexpensive checks to generate 3427 unique line segments. For the same point set, using the QuadTree system, the number of checks = 7886 to generate 3433 lines. I don't get this discrepancy for the same point set, but it is not worth investigating 6 extra lines created in a thousand points (most probably is the way I am generating ids of each line). For this animation in particular, the creation on every frame of lines are more computationally expensive than the search of pair of points proximity. So the only way I can see for the QuadTree could beat the efficient Brute force method is by merging the Node Class with the Point class, so we don't need to create new Points every frame, only update their location. But that would make the QuadTree less generic, and I'm not sure if we really could get so much of a better performance, but probably it would. I should spill some graphs comparing the QuadTree version the vanilla one, but I am getting a bit dishearted by the lack of gains for so many code inserted; so many classes for zero. Just watch the video and enjoy and never underestimate the power of efficient Brute Force.
 
 [![Pseudo-Triangulation using QuadTree search](https://i.ytimg.com/vi/azchQMfBY_Y/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDI5irmKTnuaRenSUZajLn4oaOLkQ)](https://www.youtube.com/watch?v=azchQMfBY_Y)
+
+#### Spatial Hashing, or [Spatial Partitioning Bin](https://en.wikipedia.org/wiki/Bin_(computational_geometry))
+This type of Spatial Partitionaning method is mentioned on Chapter 7 of [Real-Time Collision Detection](http://www.r-5.org/files/books/computers/algo-list/realtime-3d/Christer_Ericson-Real-Time_Collision_Detection-EN.pdf). I tried the methods described there, but it didn't work the way I expected. The way I implemented was based a blog post from Conkerjo, [Spatial hashing implementation for fast 2D collisions](https://conkerjo.wordpress.com/2009/06/13/spatial-hashing-implementation-for-fast-2d-collisions). I expect this to be a bit faster than the QuadTree implementation I did. So far, I read that spatial hashing is a very reliable method for any detection method, be that collision or whatever the need for detecting stuff nearby, and it is what the gaming industry uses.
+
+![Spatial Hashing Demonstration](imgs/spatialHashingDemonstration.gif)
+
+Spatial Hashing is already better than QuadTree because now I can actually detect line intersections per cell quadrants and have some chance of beating efficent Brute Force method. For me to do the same using QuadTree I probably would have to transform it into [R-tree](https://en.wikipedia.org/wiki/R-tree), and I don't even know what those are. And also, Spatial Hashing is way easier to understand and implement.
+
+The way it works you can extract the points from each individual cell (or bin, or bucket or whatever the name convention) or use a rectangular|circular range to get the points. The way I wrote it's pretty much independent from Processing, so easily convertable to plain Java.
 
 #### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
@@ -115,7 +126,7 @@ With this r, the length of the segment lines are so small (near zero), they are 
 
 * Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
 -> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was the most efficient way to do the searches n(n-1)/2; each line checks against the others only once. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
-From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and R-tree (https://en.wikipedia.org/wiki/R-tree) are better for this task.
+From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and [R-tree](https://en.wikipedia.org/wiki/R-tree) are better for this task.
 
 \- \- \-
 
