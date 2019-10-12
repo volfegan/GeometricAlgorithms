@@ -39,7 +39,7 @@ This type of Spatial Partitionaning method is mentioned on Chapter 7 of [Real-Ti
 
 ![Spatial Hashing Demonstration](imgs/spatialHashingDemonstration.gif)
 
-Spatial Hashing is already better than QuadTree because now I can actually detect line intersections per cell quadrants and have some chance of beating efficent Brute Force method. For me to do the same using QuadTree I probably would have to transform it into [R-tree](https://en.wikipedia.org/wiki/R-tree), and I don't even know what those are. And also, Spatial Hashing is way easier to understand and implement.
+Spatial Hashing is already better than QuadTree because now I can actually detect line intersections per cell quadrants and have some chance of beating efficient Brute Force method. For me to do the same using QuadTree I probably would have to transform it into [R-tree](https://en.wikipedia.org/wiki/R-tree), and I don't even know what those are. And also, Spatial Hashing is way easier to understand and implement.
 
 The way it works you can extract the points from each individual cell (or bin, or bucket or whatever the name convention) or use a rectangular|circular range to get the points. The way I wrote it's pretty much independent from Processing, so easily convertable to plain Java.
 
