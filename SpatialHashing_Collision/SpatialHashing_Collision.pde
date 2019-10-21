@@ -1,14 +1,4 @@
-// Daniel Shiffman, modified and improved by Volfegan
-// http://codingtra.in
-// http://patreon.com/codingtrain
-//Videos
-//Part 1:
-//https://www.youtube.com/watch?v=OJxEcs0w_kE
-//Part 2: 
-//https://www.youtube.com/watch?v=QQx_NmCIuCY
-//Part 3: 
-//https://www.youtube.com/watch?v=z0YFFg_nBjw
-
+// author Volfegan [Daniel L Lacerda] 
 
 import java.util.TreeSet;
 import java.util.*;
