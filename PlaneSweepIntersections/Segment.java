@@ -5,7 +5,7 @@
  * 
  */
 public class Segment implements Comparable<Segment> {
-  private Point a; //always the top point (lower y value)
+  private Point a; //always the left point (lower x value)
   private Point b;
   private double value; //'y' value calculated from a 'x' the segment line equation
 
