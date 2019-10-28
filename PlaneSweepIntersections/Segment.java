@@ -102,7 +102,8 @@ public class Segment implements Comparable<Segment> {
     }
     return 0;
   }
-  //some segment is equal to another if their points are equal, even if they're inversed
+  
+  //some segment is equal to another if their points are equal, no matter the order of points a, b
   public boolean equals(Object segment) {
     Segment s = (Segment) segment;
     if ((this.a.equals(s.a) && this.b.equals(s.b)) ||

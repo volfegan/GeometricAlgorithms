@@ -4,7 +4,6 @@
  */
 import java.util.TreeSet;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class SpatialHash {
 
