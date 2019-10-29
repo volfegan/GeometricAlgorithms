@@ -196,6 +196,22 @@ public class SpatialHash {
     for (int a = 0; a <= h/cellSize; a++) {
       line(0, cellSize*(a+0.5), w, cellSize*(a+0.5));
     }
+    //show selected quadrant (mouse hover)
+    Rectangle boundary = null;
+    for (int u = 0; u <= cols; u++) {
+      for (int v = 0; v <= rows; v++) {
+        //create a rectangle boundary around one bucket cell
+        float x = u * cellSize;
+        float y = v * cellSize;
+        boundary = new Rectangle(x, y, cellSize/2, cellSize/2);
+        Point mouse = new Point(mouseX, mouseY);
+        if (boundary.contains(mouse)) {
+          stroke(0, 255, 0);
+          rectMode(CENTER);
+          rect(x, y, cellSize, cellSize);
+        }
+      }
+    }
     //show points
     for (TreeSet<Point> points : buckets.values()) {
       for (Point p : points) {
