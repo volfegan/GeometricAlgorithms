@@ -128,6 +128,38 @@ With this r, the length of the segment lines are so small (near zero), they are 
 -> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was the most efficient way to do the searches n(n-1)/2; each line checks against the others only once. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search.
 From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and [R-tree](https://en.wikipedia.org/wiki/R-tree) are better for this task.
 
+
+                    111 11  1 11
+                11 1001001 0000 01 11
+                100101010011 0_01_01_1
+             011 100110010100 101 0 00
+            1_0_11_0 11 10001__1_0_1 00
+          00   00 0 01 01 10 0 1 110 100
+           110_---110\0\|00-00--1---11~
+                00     \|||
+                        |||
+                        |||
+                        |||
+                  , -=-~  .-^- _
+                         x
+                        / \
+                    ___/   \___
+                   /           \
+                  /             \
+                 x               x
+              __/ \__         __/ \__
+             /       \       /       \
+            x         x     x         x
+           / \       / \   / \       / \
+          x   x     x   x x   x     x   x
+            _/ \_           _/ \_        \
+           /     \         /     \        x
+          x       x       x       x
+         / \     / \     / \     / \
+        x   x   x   x   x   x   x   x
+        and plant a tree. Geometry everywhere
+        Because the roots of knowledge are deep
+     
 \- \- \-
 
 \[ all code available under MIT License - feel free to use. \]
