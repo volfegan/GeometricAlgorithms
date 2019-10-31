@@ -41,7 +41,11 @@ This type of Spatial Partitionaning method is mentioned on Chapter 7 of [Real-Ti
 
 Spatial Hashing is already better than QuadTree because now I can actually detect line intersections per cell quadrants and have some chance of beating efficient Brute Force method. For me to do the same using QuadTree I probably would have to transform it into [R-tree](https://en.wikipedia.org/wiki/R-tree), and I don't even know what those are. And also, Spatial Hashing is way easier to understand and implement.
 
-The way it works you can extract the points from each individual cell (or bin, or bucket or whatever the name convention) or use a rectangular|circular range to get the points. The way I wrote it's pretty much independent from Processing, so easily convertable to plain Java.
+The way it works you can extract the points from each individual cell (or bin, or bucket or whatever the name convention) or use a rectangular|circular range to get the points. The way I wrote it's pretty much independent from Processing, so easily convertable to plain Java (I know I am speaking to myself here).
+
+* Spatial Hashing for segment detection
+
+A small code increment in the spatial hash class makes it possible to detect segments. It works by assigning a point from the segment that is also inside the hash cell. Each point references the segment. The next step is to see if using this method we find segment intersections more efficiently than brute force. I still have to figure out how to filter duplicate segments check from different buckets cells as like: 1st bucket cell, check the intersection of segment lines. 2nd bucket cell, still the same lines, it will check again, 3rd bucket the same lines, etc. In the worst-case scenario there will be more checks than from efficient brute force. Possible ways to address this is to shrink the cell size, but that also has some cost effects as more hash cells are created or some clever way to detect if some check was already performed.
 
 #### Find line segments intersections by Brute Force method 
 Initial implementation of an efficient Plane sweep Line Segment Intersection. This visualization program shows how the brute force works its way in a 2D loop to find all the intersections from some given points that form lines. Basically, every line checks against the others for some point intersection. The text file on the data directory contains the points that form lines following this format separated only by space. Example:
