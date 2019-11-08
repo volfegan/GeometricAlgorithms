@@ -7,12 +7,12 @@
 public class Segment implements Comparable<Segment> {
   private Point a; //always the left point (lower x value)
   private Point b;
-  private double value; //'y' value calculated from a 'x' the segment line equation
+  private double id; //(a.x * Prime + a.y)*(b.x * Prime + b.y)
 
   Segment() {
     this.a = new Point();
     this.b = new Point();
-    this.value = 0;
+    this.id = 0;
   }
   Segment(int x0, int y0, int x1, int y1) {
     a = new Point(x0, y0);
@@ -20,7 +20,7 @@ public class Segment implements Comparable<Segment> {
     Segment s = new Segment(a, b);
     this.a = s.a;
     this.b = s.b;
-    this.value = s.value;
+    this.id = s.id;
   }
   //construct the segment lines with lower x (on left) as start points 'a'
   Segment(Point a, Point b) {
@@ -41,7 +41,8 @@ public class Segment implements Comparable<Segment> {
         this.b = a;
       }
     }
-    this.calculate_value(this.startPoint().getX());
+    int H0 = 2999; //an arbitrarily chosen prime
+    this.id = (this.startPoint().x * H0 + this.startPoint().y) * (this.endPoint().x * H0 + this.endPoint().y);
   }
   //return the most low x Point (left position), that is 'a', but I'll test again
   public Point startPoint() {
@@ -59,17 +60,11 @@ public class Segment implements Comparable<Segment> {
       return a;
     }
   }
-  //calculate a y value from the line equation extracted from the segment
-  //the value is used to position the segment on statusT and eventQ
-  public double calculate_value(double old_value) {
-    double x0 = this.startPoint().getX();
-    double y0 = this.startPoint().getY();
-    double x1 = this.endPoint().getX();
-    double y1 = this.endPoint().getY();
-    //works only if the density of lines are not big. I don't know a better way to implement a robust formula
-    this.value = y0 + (((y1 - y0) / (x1 - x0)) * (old_value - x0));
-    return this.value;
+
+  public double id() {
+    return this.id;
   }
+
 
   /*
    * calculates a point inside both the rectangle range and the segment line itself
@@ -169,24 +164,19 @@ public class Segment implements Comparable<Segment> {
     return null;
   }
 
-  public void set_value(double value) {
-    this.value = value;
-  }
-
-  public double get_value() {
-    return this.value;
-  }
-
   public String toString() {
     String s = a.toString() + "->" + b.toString();
     return s;
   }
 
+  //uses the startPoint calculated hash value as comparison
   public int compareTo(Segment s) {
-    if (this.get_value() < s.get_value()) {
+    int H1 = 0x8da6b343; //an arbitrarily chosen prime
+
+    if (this.startPoint().x * H1 + this.startPoint().y > s.startPoint().x * H1 + s.startPoint().y) {
       return 1;
     }
-    if (this.get_value() > s.get_value()) {
+    if (this.startPoint().x * H1 + this.startPoint().y < s.startPoint().x * H1 + s.startPoint().y) {
       return -1;
     }
     return 0;
