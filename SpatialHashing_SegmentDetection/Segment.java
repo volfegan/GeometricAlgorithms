@@ -7,7 +7,7 @@
 public class Segment implements Comparable<Segment> {
   private Point a; //always the left point (lower x value)
   private Point b;
-  private double id; //(a.x * Prime + a.y)*(b.x * Prime + b.y)
+  private double id; //(a.x * Prime + a.y * Prime)*(b.x * Prime + b.y * Prime)
 
   Segment() {
     this.a = new Point();
@@ -41,8 +41,12 @@ public class Segment implements Comparable<Segment> {
         this.b = a;
       }
     }
-    int H0 = 2999; //an arbitrarily chosen prime
-    this.id = (this.startPoint().x * H0 + this.startPoint().y) * (this.endPoint().x * H0 + this.endPoint().y);
+    int H1 = 0xcb1ab31f; //an arbitrarily chosen prime
+    int H2 = 0x8da6b343; //an arbitrarily chosen prime
+    int H3 = 2999;
+    int H4 = 3001;
+    this.id = (this.startPoint().x * H1 + this.startPoint().y * H2) + 
+              (this.endPoint().x * H3 + this.endPoint().y * H4);
   }
   //return the most low x Point (left position), that is 'a', but I'll test again
   public Point startPoint() {
