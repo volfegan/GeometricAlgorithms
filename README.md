@@ -73,6 +73,11 @@ Although it looks very inefficient, the number of checks in the brute force incr
 ![BruteForce method- Number of segments Vs checks](imgs/PlaneSweepBruteForce_Number_of_segments_Vs_checks.png)
 
 
+
+#### Spatial Hashing to find segment intersections
+
+
+
 #### Plane sweep to find segment intersections by Bentley-Ottmann algorithm
 This implementation is heavily based on [valenpe7's bentley-ottmann](https://github.com/valenpe7/bentley-ottmann). Yeah, after the first two weeks I gave up trying to do this by myself (I see I was doing the compareTo() on segment class very naive so statusT was doing bananas), so kudos to user valenpe7. I remember being the guy that lent homework to others. Now I lurk GitHub for people that are better than me when I fail.
 
