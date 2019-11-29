@@ -73,11 +73,6 @@ Although it looks very inefficient, the number of checks in the brute force incr
 ![BruteForce method- Number of segments Vs checks](imgs/PlaneSweepBruteForce_Number_of_segments_Vs_checks.png)
 
 
-
-#### Spatial Hashing to find segment intersections
-
-
-
 #### Plane sweep to find segment intersections by Bentley-Ottmann algorithm
 This implementation is heavily based on [valenpe7's bentley-ottmann](https://github.com/valenpe7/bentley-ottmann). Yeah, after the first two weeks I gave up trying to do this by myself (I see I was doing the compareTo() on segment class very naive so statusT was doing bananas), so kudos to user valenpe7. I remember being the guy that lent homework to others. Now I lurk GitHub for people that are better than me when I fail.
 
@@ -133,6 +128,10 @@ The algorithm became faster than the bruteforce somewhere after 200 segments. Th
 With this r, the length of the segment lines are so small (near zero), they are basically dots scattered in the canvas and there are never any intersection. So, of course, the Bentley-Ottmann algorithm will perform better. The only events that occur are the start and end events.
 
 ![Plane Sweep Intersections- Number of segments Vs Processing Time for a random segments (x,y)->([x−r,x+r]×[y−r,y+r]), r ~ n^(−1)](imgs/PlaneSweepIntersections_Number_of_segments_Vs_Time_R_n^(-1).png)
+
+
+#### Spatial Hashing to find segment intersections
+
 
 
 * Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
