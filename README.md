@@ -130,13 +130,14 @@ With this r, the length of the segment lines are so small (near zero), they are 
 ![Plane Sweep Intersections- Number of segments Vs Processing Time for a random segments (x,y)->([x−r,x+r]×[y−r,y+r]), r ~ n^(−1)](imgs/PlaneSweepIntersections_Number_of_segments_Vs_Time_R_n^(-1).png)
 
 
-#### Spatial Hashing to find segment intersections
-
-
-
 * Conclusion on Bentley-Ottmann algorithm vs Bruteforce to find intersections:
 -> If you are going to handle less than 500 lines or poligons made of lines for colision detection, use BruteForce. The loop I did on Bruteforce was the most efficient way to do the searches n(n-1)/2; each line checks against the others only once. This is a video showing how to do it: [Coding Math: Episode 58 - Array Math](https://www.youtube.com/watch?v=75Cbkoo4Gwg). The bruteforce method is now using the loop with no redudancy search as well the graphs.
 From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and [R-tree](https://en.wikipedia.org/wiki/R-tree) are better for this task and also spatial hashing. If you have to use Bentley-Ottmann algorithm for some kind of homework, don't waste your time trying to implement it from scratch to understand the process. It is a shit thing. Go for what the industry uses and understand those.
+
+
+#### Spatial Hashing to find segment intersections
+
+
 
 
                     111 11  1 11
