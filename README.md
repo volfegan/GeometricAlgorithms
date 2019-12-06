@@ -135,6 +135,11 @@ With this r, the length of the segment lines are so small (near zero), they are 
 From this stackoverflow (https://stackoverflow.com/questions/5029882/simple-somewhat-efficient-algorithm-for-finding-intersections-between-one-serie), a user states that Bentley & Ottmann is hard to implement for edge cases (I totally agree) and [R-tree](https://en.wikipedia.org/wiki/R-tree) are better for this task and also spatial hashing. If you have to use Bentley-Ottmann algorithm for some kind of homework, don't waste your time trying to implement it from scratch to understand the process. It is a shit thing. Go for what the industry uses and understand those.
 
 
+#### Spatial Hashing to find segment intersections
+
+
+
+
                     111 11  1 11
                 11 1001001 0000 01 11
                 100101010011 0_01_01_1
