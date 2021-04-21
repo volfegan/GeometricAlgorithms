@@ -1,4 +1,7 @@
-//Marching Squares Metaballs Interpolation with filling colours gradient 
+/*Marching Squares Metaballs Interpolation with filling colours gradient
+ * @author Volfegan [Daniel L Lacerda]
+ * 
+ */
 //References:
 //https://en.wikipedia.org/wiki/Marching_squares
 //http://jamie-wong.com/2014/08/19/metaballs-and-marching-squares/
@@ -6,7 +9,6 @@
 //https://gist.github.com/volfegan/3a1fd4e9b4a42bdcc3a3ba3842ca449a
 
 //The Coding Train / Daniel Shiffman
-//https://thecodingtrain.com/challenges/coding-in-the-cabana/005-marching-squares.html
 //https://youtu.be/0ZONMNUKTfU
 //https://github.com/CodingTrain/website/tree/main/challenges/coding-in-the-cabana/005_marching_squares/Processing_metaballs_interpolation/
 
