@@ -5,7 +5,6 @@ Geometric Algorithms implemented in Java and Processing v3. Algorithms details c
 * Pseudo-Triangulation by Brute Force method or using QuadTree search
 * Marching Squares for Metaballs/MetaDiamonds
 * Spatial Hashing or Spatial Partitioning Bin
-* Delaunay Triangulation (working)
 * Find line segments intersections by Brute Force method
 * Plane sweep to find segment intersections by Bentley-Ottmann algorithm (not reliable and fault)
 
