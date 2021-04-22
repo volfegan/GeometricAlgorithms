@@ -43,7 +43,7 @@ A great algorithm to generates contour for a two-dimensional scalar field (recta
 
 [video demonstration]
 
-Limitations: this only produces a single value isoline for some determined threshold.
+Limitations: this only produces a single value isoline for some determined threshold. But this can be easily fixed by creating a loop for multiple different threshold values for different isolines. This is important to create map heights isoline sketches. The colouring just need to be tweaked with each threshold value.
 
 
 #### Spatial Hashing, or [Spatial Partitioning Bin](https://en.wikipedia.org/wiki/Bin_(computational_geometry))
