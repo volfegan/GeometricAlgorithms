@@ -65,8 +65,8 @@ void setup() {
   strokeWeight(1);
   println("Resolution grid: "+rez);
 
-  cols = 1 + width / rez;
-  rows = 1 + height / rez;
+  cols = 2 + width / rez;
+  rows = 2 + height / rez;
   field = new float[cols][rows];
   for (int i = 0; i < blobs.length; i++) {
     //4 star-diamond, the rest is regular metaballs
@@ -506,8 +506,8 @@ void contourLine(PVector v1, PVector v2) {
 }
 //Reset new resolution size changes
 void initMetaballsField() {
-  cols = 1 + width / rez;
-  rows = 1 + height / rez;
+  cols = 2 + width / rez;
+  rows = 2 + height / rez;
   field = new float[cols][rows];
   //Generate the metaball field values 
   for (int i = 0; i < cols; i++) {
