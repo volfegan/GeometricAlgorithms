@@ -3,6 +3,7 @@ Geometric Algorithms implemented in Java and Processing v3. Algorithms details c
 
 * QuadTree
 * Pseudo-Triangulation by Brute Force method or using QuadTree search
+* Gilbert Johnson Keerthi collision detection algorithm
 * Marching Squares for Metaballs/MetaDiamonds
 * Spatial Hashing or Spatial Partitioning Bin
 * Find line segments intersections by Brute Force method
@@ -36,6 +37,13 @@ So by putting a QuadTree structure I expected at least some minor improvements, 
 As for comparison, if we start with 1000 points, maxDist = 40, it gets some 10~15 frames/s. The same as the brute force, maybe a little less fast. Also, the brute force method will nedd 499500 inexpensive checks to generate 3427 unique line segments. For the same point set, using the QuadTree system, the number of checks = 7886 to generate 3433 lines. I don't get this discrepancy for the same point set, but it is not worth investigating 6 extra lines created in a thousand points (most probably is the way I am generating ids of each line). For this animation in particular, the creation on every frame of lines are more computationally expensive than the search of pair of points proximity. So the only way I can see for the QuadTree could beat the efficient Brute force method is by merging the Node Class with the Point class, so we don't need to create new Points every frame, only update their location. But that would make the QuadTree less generic, and I'm not sure if we really could get so much of a better performance, but probably it would. I should spill some graphs comparing the QuadTree version the vanilla one, but I am getting a bit dishearted by the lack of gains for so many code inserted; so many classes for zero. Just watch the video and enjoy and never underestimate the power of efficient Brute Force.
 
 [![Pseudo-Triangulation using QuadTree search](https://i.ytimg.com/vi/azchQMfBY_Y/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLDI5irmKTnuaRenSUZajLn4oaOLkQ)](https://www.youtube.com/watch?v=azchQMfBY_Y)
+
+
+#### [Gilbert Johnson Keerthi collision detection algorithm](https://en.wikipedia.org/wiki/Gilbert%E2%80%93Johnson%E2%80%93Keerthi_distance_algorithm)
+
+Nothing fancy here, just the function of the GJK algorithm that returns true/false for collision detection of any polygons of any size (polygons, lines, points). This is one of the most efficients algorithms for collision detection, and on its full form it can even detect the minimal distance between the shapes (not done here). A detail explanation can be found here: [A Strange But Elegant Approach to a Surprisingly Hard Problem (GJK Algorithm)](https://www.youtube.com/watch?v=ajv46BSqcK4). Other resorce used as reference for my code: https://github.com/kroitor/gjk.c, https://observablehq.com/@esperanc/2d-gjk-and-epa-algorithms.
+
+So if you need a reliable collision detection for polygons, this is the one you need. As a test, I built an [Asteroid game with minimal working physics](https://github.com/volfegan/Asteroid_game_with_physics) using only this as a collision detection, and it is pretty robust.
 
 
 #### [Marching Squares](https://en.wikipedia.org/wiki/Marching_squares) for [Metaballs/MetaDiamonds](https://www.gamedev.net/articles/programming/graphics/exploring-metaballs-and-isosurfaces-in-2d-r2556/)
@@ -76,7 +84,7 @@ Initial implementation of an efficient Plane sweep Line Segment Intersection. Th
 
 If you run the program the user can either choose the txt file contenting the points or just cancel the file choosing to automatically generate a random number of points (from 2~100). By running the visualization it will produce a file "output.txt" with the number of points, intersections, processing time and other relevant data. The algorithm itself is found on processing setup() function and it is general enough to be use in any Java aplication. The visualization just shows how the algorithm works in a slow, comprehensible manner. See below the visualization:
 
-Visualization of Line Intersections brute force search algorithm
+Visualization of Line Intersections by brute force search algorithm
 
 [![Visualization of Line Intersections brute force search algorithm](https://i.ytimg.com/vi/pyxHgQsKN2g/hqdefault.jpg?sqp=-oaymwEZCNACELwBSFXyq4qpAwsIARUAAIhCGAFwAQ==&rs=AOn4CLAr2lVJdZ0f4sjrXPPIDrYiJos_Hg)](https://www.youtube.com/watch?v=pyxHgQsKN2g)
 
@@ -87,12 +95,8 @@ Although it looks very inefficient, the number of checks in the brute force incr
 ![BruteForce method- Number of segments Vs checks](imgs/PlaneSweepBruteForce_Number_of_segments_Vs_checks.png)
 
 
-#### Spatial Hashing to find segment intersections
-[missing]
-
-
 #### Plane sweep to find segment intersections by Bentley-Ottmann algorithm
-This implementation is heavily based on [valenpe7's bentley-ottmann](https://github.com/valenpe7/bentley-ottmann). Yeah, after the first two weeks I gave up trying to do this by myself (I see I was doing the compareTo() on segment class very naive so statusT was doing bananas), so kudos to user valenpe7. I remember being the guy that lent homework to others. Now I lurk GitHub for people that are better than me when I fail.
+This implementation is heavily based on [valenpe7's bentley-ottmann](https://github.com/valenpe7/bentley-ottmann). Yeah, after the first two weeks I gave up trying to do this by myself (I see I was doing the compareTo() on segment class very naive so statusT was doing bananas), so kudos to user valenpe7. I remember being the guy that lent homework to others. Now I lurk GitHub for people that are better than me when I fail. And don't use this method for real applications. It is bad.
 
  * pseudo code: http://geomalgorithms.com/a09-_intersect-3.html
  * pseudo code: https://en.wikipedia.org/wiki/Bentley%E2%80%93Ottmann_algorithm#Detailed_algorithm
