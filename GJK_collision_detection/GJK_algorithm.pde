@@ -1,6 +1,6 @@
-/*
+/* Function for GJK algorithm collision detection
  * @author Volfegan Geist [Daniel Leite Lacerda]
- * https://github.com/volfegan
+ * https://github.com/volfegan/Asteroid_game_with_physics
  */
 /*
  //Resources:
@@ -9,6 +9,7 @@
  //https://observablehq.com/@esperanc/2d-gjk-and-epa-algorithms
  //https://en.wikipedia.org/wiki/Gilbert%E2%80%93Johnson%E2%80%93Keerthi_distance_algorithm
  */
+
 
 /*
  * Calculates the magnitude (length) of the vector, squared.
@@ -62,7 +63,7 @@ PVector calculateCentre(PVector[] vertices) {
   return centre;
 }
 /*
-//test 
+//calculateCentre test 
  PVector[] vertices = {new PVector(0,3,0), new PVector(0,0,0), new PVector(3,3,0)};
  println(calculateCentre(vertices)); //= [1,2,0]
  PVector[] vertices = {new PVector(-1,1,0), new PVector(1,1,0), new PVector(-1,-1,0), new PVector(1,-1,0)};
@@ -98,7 +99,9 @@ PVector[] minkDiff(PVector[] vertices1, PVector[] vertices2) {
 
 /*
  * returns the point from the shape which has the highest dot product with vector d.
- * @param PVector[] vertices[(x0,y0),(x1,y1),...], direction d
+ * It assumes vertices were built clockwise
+ * @param PVector[] vertices[(x0,y0),(x1,y1),...]
+ * @param direction d
  * @return PVector
  */
 PVector furthestPoint(PVector[] vertices, PVector d) {
@@ -125,7 +128,7 @@ PVector furthestPoint(PVector[] vertices, PVector d) {
   return vertices[index];
 }
 /*
-//test 
+//furthestPoint test 
 PVector[] vertices = {new PVector(0,3,0), new PVector(0,0,0), new PVector(3,3,0)};
  println(vertices);
  println(furthestPoint(vertices, new PVector(1,0,0))); //= [3,3,0]
@@ -136,7 +139,9 @@ PVector[] vertices = {new PVector(0,3,0), new PVector(0,0,0), new PVector(3,3,0)
 
 /*
  * returns the support point of the Minkowski difference between the two polygons on direction d & -d
- * @param PVector[] vertices1[(x0,y0),(x1,y1),...], vertices2[(x0,y0),(x1,y1),...], direction d
+ * @param PVector[] vertices1[(x0,y0),(x1,y1),...]
+ * @param PVector[] vertices2[(x0,y0),(x1,y1),...]
+ * @param PVector d (direction)
  * @return PVector
  */
 PVector support(PVector[] vertices1, PVector[] vertices2, PVector d) {
@@ -144,14 +149,11 @@ PVector support(PVector[] vertices1, PVector[] vertices2, PVector d) {
   PVector P2 = furthestPoint(vertices2, PVector.mult(d, -1));
   return PVector.sub(P1, P2);
 }
-/*
-//test 
-And I deleted by mistake this test. It works. Trust me!
-*/
 
 /*
  * The GJK collision detection algorithm
- * @param PVector[] vertices1[(x0,y0),(x1,y1),...], vertices2[(x0,y0),(x1,y1),...]
+ * @param PVector[] vertices1[(x0,y0),(x1,y1),...]
+ * @param PVector[] vertices2[(x0,y0),(x1,y1),...]
  * @return boolean
  */
 boolean gfk_detectCollision(PVector[] vertices1, PVector[] vertices2) {
@@ -186,7 +188,7 @@ boolean gfk_detectCollision(PVector[] vertices1, PVector[] vertices2) {
     if (a.dot(d) < 0) {
       //println("No colision (iteration="+counter+")");
 
-      return false; // no collision
+      return false;
     }
 
     //simplex line case
