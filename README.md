@@ -47,7 +47,7 @@ Nothing fancy here, just the function of the GJK algorithm that returns true/fal
 So if you need a reliable collision detection for polygons, this is the one you need. As a test, I built an [Asteroid game with minimal working physics](https://github.com/volfegan/Asteroid_game_with_physics) using only this as a collision detection, and it is pretty robust. Besides the GJK algorithm, the game also has functions to calculate: polygon area, mass moment of inertia, polygon centre, polygon rotation, screen space-warping (toroidal mapping) without artifacts, elastic collision linear momentum for velocity updates, angular momentum, and more.
 
 
-### Simple polygon triangulation
+#### Simple polygon triangulation
 
 A simple triangulation of any convex/non-convex polygon with ordered clockwise/anti-clockwise points. It creates a array of triangles using only the vertices points of the polygon. Best used if more/finer processing is required for the polygon. 
 
