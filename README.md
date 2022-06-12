@@ -49,6 +49,8 @@ So if you need a reliable collision detection for polygons, this is the one you 
 
 #### Simple polygon triangulation
 
+![Simple polygon triangulation](imgs/Simple_polygon_triangulation.jpg)
+
 A simple triangulation of any convex/non-convex polygon with ordered clockwise/anti-clockwise points. It creates a array of triangles using only the vertices points of the polygon. Best used if more/finer processing is required for the polygon. 
 
 
